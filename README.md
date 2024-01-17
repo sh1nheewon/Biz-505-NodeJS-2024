@@ -13,3 +13,9 @@
 
 ## express framework 프로젝트 생성
 - `express 프로젝트명` 
+
+
+## 생성 후 
+- npm install
+- nodemon 실행. Ctrl + c 로 나와서
+- npm install mysql2 실행
