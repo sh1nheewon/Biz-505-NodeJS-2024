@@ -13,16 +13,16 @@ router.get("/", (req, res) => {
     res.render("student/list");
 });
 
+
+// localhost:3000/student/insert -> 주소를 입력하면 input.pug 파일을 열기
 router.get("/insert", (req, res) => {
-    res.render("student/input");
+    res.render("student/input.pug");
 });
 
 
 
 // router 객체를 다른곳에서 import 할 수 있도록 export 하기
 export default router;
-
-
 
 
 //import+export 하고 app.js 에서 import 하고(24), app.use 해주기(52번)
