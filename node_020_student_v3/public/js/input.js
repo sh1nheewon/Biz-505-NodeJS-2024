@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const target = event.target;
         const value = target.value;
         if (!value) {
-            error_divs[ST_INDEX.ST_NAME].innerText = " * 이름은 반드시 입력해야 합니다"
+            error_divs[ST_INDEX.ST_NAME].innerText = " * 이름은 반드시 입력해야 합니다 "
             st_name.select();
             return false;
         }

@@ -5,21 +5,35 @@ block content
         script(src="/js/input.js")
     h3.student 학생정보 #{STD ? "수정" : "입력"}
     form.student.input(method="POST")
-        input#st_num(name="st_num", placeholder="학번을 입력해 주세요",value=`${STD ? STD.st_num : ""}`) 
+        if STD 
+            input#st_num(name="st_num", placeholder="학번을 입력해 주세요",
+            | value=`${STD ? STD.st_num : ""}`,readonly="readonly")
+        else 
+            input#st_num(name="st_num", placeholder="학번을 입력해 주세요",
+            | value=`${STD ? STD.st_num : ""}`)
         div.student.error.st_num
-        input#st_name(name="st_name",placeholder="이름을 입력해 주세요",value=`${STD ? STD.st_name : ""}`)
+
+        input#st_name(name="st_name",placeholder="이름을 입력해 주세요",
+        | value=`${STD ? STD.st_name : ""}`)
         div.student.error.st_name
-        input#st_dept(name="st_dept",placeholder="학과를 입력해 주세요",value=`${STD ? STD.st_dept : ""}`)
+
+        input#st_dept(name="st_dept",placeholder="학과를 입력해 주세요",
+        | value=`${STD ? STD.st_dept : ""}`)
         div.student.error.st_dept
         
-        input#st_grade(name="st_grade",placeholder="학년을 입력해 주세요", type="number",value=`${STD ? STD.st_grade : ""}`)
-        input#st_tel(name="st_tel",placeholder="전화번호를 입력해 주세요", type="tel",value=`${STD ? STD.st_tel : ""}`)
-        input#st_addr(name="st_addr",placeholder="주소를 입력해 주세요",value=`${STD ? STD.st_addr : ""}`)
+        input#st_grade(name="st_grade",placeholder="학년을 입력해 주세요", type="number",
+        | value=`${STD ? STD.st_grade : ""}`)
 
+        input#st_tel(name="st_tel",placeholder="전화번호를 입력해 주세요", type="tel",
+        | value=`${STD ? STD.st_tel : ""}`)
+
+        input#st_addr(name="st_addr",placeholder="주소를 입력해 주세요",
+        | value=`${STD ? STD.st_addr : ""}`)
+    
         input(type="date")
         input(type="time")
         input(type="datetime-local")
         input(type="file")
         input(type="color")
 
-        button(type="button") 전송
+        button(type=`${STD ? "submit" : "submit"}`) 전송
