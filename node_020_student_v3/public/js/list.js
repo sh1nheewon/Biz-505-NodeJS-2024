@@ -11,4 +11,5 @@ document.addEventListener("DOMContentLoaded", () => {
             document.location.href = `/student/${st_num}/detail`;
         }
     });
+
 });

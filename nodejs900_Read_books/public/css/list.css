@@ -1,0 +1,40 @@
+.book {
+    width: 85%;
+    margin: 5px auto;
+    text-align: center;
+}
+
+table.book {
+    border-collapse: collapse;
+}
+
+
+thead tr {
+    background-color: #bbb;
+}
+
+tr,
+td {
+    border-top: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
+    padding: 12px 16px;
+    text-align: center;
+}
+
+tr:nth-of-type(odd) {
+    background-color: #eee;
+}
+
+div.book {
+    text-align: right;
+}
+
+div.book a {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #666;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+}

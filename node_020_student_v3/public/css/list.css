@@ -8,7 +8,7 @@ h1.student {
     color: green;
 }
 
-table/student {
+table.student {
     border-collapse: collapse;
 }
 

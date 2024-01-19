@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ST_NUM: 0,
         ST_NAME: 1,
         ST_DEPT: 2,
-    };
+    };  
 
     const st_num_check = async (st_num) => {
         // 서버에 GET: /student/학번/check 로 요청하기

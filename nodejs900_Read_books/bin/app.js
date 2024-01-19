@@ -21,7 +21,7 @@ import logger from 'morgan';
 // sample router modules
 import indexRouter from '../routes/index.js';
 import usersRouter from '../routes/users.js';
-import studentRouter from "../routes/student.js"
+import booksRouter from "../routes/readbook.js";
 
 // create express framework
 const app = express();
@@ -48,7 +48,7 @@ app.use(express.static(path.join("public")));
 // router link enable
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use("/student", studentRouter);
+app.use("/books", booksRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -1,0 +1,18 @@
+form {
+    padding: 15px;
+    border: 1px solid red;
+}
+
+.book input {
+    display: block;
+    padding: 10px 16px;
+
+}
+
+#isbn,
+#title {
+    display: flex;
+    justify-content: center;
+    border: 1px solid red;
+    width: 40%;
+}

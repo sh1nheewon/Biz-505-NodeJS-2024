@@ -1,0 +1,57 @@
+extends ../layout
+block content
+    link(rel="stylesheet", href="/css/input.css")
+    if !STD
+        script(src="/js/input.js")
+    h3.book 도서정보 수정
+    form.book.input(method="POST") 
+        if STD
+        input#isbn(name="isbn", placeholder="ISBN",
+        | value=`${STD ? STD.isbn : ""}`)
+        div.book.error.isbn
+
+        input#title(name="title", placeholder="도서명",
+        | value=`${STD ? STD.title : ""}`)
+        div.book.error.title
+
+        input#publisher(name="publisher", placeholder="출판사",
+        | value=`${STD ? STD.publisher : ""}`)
+        div.book.error.publisher
+
+        input#author(name="author", placeholder="저자",
+        | value=`${STD ? STD.author : ""}`)
+        div.book.error.author
+
+        input#translator(name="translator", placeholder="역자",
+        | value=`${STD ? STD.translator : ""}`)
+
+        input#price(name="price", placeholder="가격",
+        | value=`${STD ? STD.price : ""}`)
+        div.book.error.price
+
+        input#discount(name="discount", placeholder="할인가",
+        | value=`${STD ? STD.discount : ""}`)
+
+        input#pubdate(name="pubdate", placeholder="발행일", type="date",
+        | value=`${STD ? STD.pubdate : ""}`)
+
+        input#page(name="page", placeholder="페이지",type="number",
+        | value=`${STD ? STD.page : ""}`)
+
+        input#memo(name="memo", placeholder="메모",
+        | value=`${STD ? STD.memo : ""}`)
+
+    form.book.imput.sub(method="POST")    
+        input#description(name="description", placeholder="요약",
+        | value=`${STD ? STD.description : ""}`)
+
+        input#link(name="link", placeholder="네이버링크",
+        | value=`${STD ? STD.link : ""}`)
+
+        input#image(name="image", placeholder="이미지링크",
+        | value=`${STD ? STD.image : ""}`)
+
+    form.book.input(method="POST") 
+        button(type=`${STD ? "submit" : "submit"}`) 저장
+        button.btn_insert 새로작성
+        button.btn_list 리스트보기

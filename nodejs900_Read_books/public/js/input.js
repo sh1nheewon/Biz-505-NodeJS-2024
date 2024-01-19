@@ -1,0 +1,117 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const BOOK_INDEX = {
+        ISBN: 0,
+        TITLE: 1,
+        AUTHOR: 2,
+        PUBLISHER: 3,
+        PRICE: 4,
+    };
+
+    const isbn_check = async (isbn) => {
+        const response = await fetch(`/books/${isbn}/check`);
+        const json = await response.json();
+        console.log(json);
+        return json.result;
+    };
+
+    const form = document.querySelector("form.book");
+    const btn_submit = form.querySelector("button");
+
+    const inputs = form.querySelectorAll("input");
+    const isbn = inputs[ST_INDEX.ISBN];
+    const title = inputs[ST_INDEX.TITLE];
+    const author = inputs[ST_INDEX.AUTHOR];
+    const publisher = inputs[ST_INDEX.PUBLISHER];
+    const price = inputs[ST_INDEX.PRICE];
+
+    const error_divs = document.querySelectorAll("div.book.error");
+
+    const isbn_valid = async (target) => {
+
+        const result = await isbn_check(target.value);
+        let message = "";
+        let color = "red";
+        if (result === "ERROR") {
+            message = " * DB 오류";
+        } else if (result === "있다") {
+            message = " * 이미 등록된 ISBN번입니다";
+        } else if (result === "없다") {
+            message = " * 사용가능한 ISBN입니다";
+            color = "blue";
+        }
+    }
+    btn_submit?.addEventListener("click", async () => {
+        error_divs.forEach((item) => (item.innerHTML = ""));
+        if (!isbn.value) {
+            error_divs[ST_INDEX.ISBN].innerHTML =
+                "* ISBN을 반드시 입력하세요";
+            isbn.select();
+            return false;
+        } else {
+            const bRedYes = isbn_valid(isbn);
+            if (bRedYes) {
+                isbn.select();
+                return false;
+            }
+        }
+        if (!title.value) {
+            error_divs[ST_INDEX.TITLE].innerHTML =
+                "* 제목은 반드시 입력해야 합니다";
+            title.select();
+            return false;
+        }
+        if (!author.value) {
+            error_divs[ST_INDEX.AUTHOR].innerHTML =
+                "* 저자는 반드시 입력하세요";
+            author.select();
+            return false;
+        }
+        if (!publisher.value) {
+            error_divs[ST_INDEX.PUBLISHER].innerHTML =
+                "* 출판사를 반드시 입력하세요";
+            publisher.select();
+            return false;
+        }
+        if (!price.value) {
+            error_divs[ST_INDEX.PRICE].innerHTML =
+                "* 가격을 반드시 입력하세요";
+            price.select();
+            return false;
+        }
+        form.submit();
+    });
+
+    let EVENT_ISBN = false;
+    isbn?.addEventListener("blur", async (event) => {
+        const target = event.target;
+        const value = target.value;
+        if (!value) {
+            error_divs[ST_INDEX.ISBN].innerText =
+                "* ISBN을 입력해 주세요";
+            target.select();
+            return false;
+        } else {
+            const bRedYes = await isbn_valid(target);
+            if (bRedYes) {
+                target.select();
+                return false;
+            }
+        }
+        EVENT_ISBN = true;
+    });
+
+    title.addEventListener("blur", (event) => {
+        if (!EVENT_ISBN) return false;
+        const target = event.target;
+        const value = target.value;
+        if (!value) {
+            error_divs[ST_INDEX.TITLE].innerText = " * 도서명은 반드시 입력해야 합니다 "
+            title.select();
+            return false;
+        }
+    });
+
+    isbn.focus();
+
+
+});
