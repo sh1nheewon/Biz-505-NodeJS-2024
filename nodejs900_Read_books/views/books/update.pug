@@ -32,16 +32,15 @@ block content
         input#discount(name="discount", placeholder="할인가",
         | value=`${STD ? STD.discount : ""}`)
 
-        input#pubdate(name="pubdate", placeholder="발행일", type="date",
+        input#pubdate(name="pubdate", placeholder="발행일",
         | value=`${STD ? STD.pubdate : ""}`)
 
-        input#page(name="page", placeholder="페이지",type="number",
+        input#page(name="page", placeholder="페이지",
         | value=`${STD ? STD.page : ""}`)
 
         input#memo(name="memo", placeholder="메모",
         | value=`${STD ? STD.memo : ""}`)
 
-    form.book.imput.sub(method="POST")    
         input#description(name="description", placeholder="요약",
         | value=`${STD ? STD.description : ""}`)
 
@@ -51,7 +50,6 @@ block content
         input#image(name="image", placeholder="이미지링크",
         | value=`${STD ? STD.image : ""}`)
 
-    form.book.input(method="POST") 
         button(type=`${STD ? "submit" : "submit"}`) 저장
         button.btn_insert 새로작성
         button.btn_list 리스트보기
