@@ -4,15 +4,20 @@ form {
 }
 
 .book input {
-    display: block;
+    display: inline-block;
     padding: 10px 16px;
-
+    
 }
 
 #isbn,
 #title {
-    display: flex;
+    
     justify-content: center;
     border: 1px solid red;
-    width: 40%;
+    width: 35%;
+}
+
+form button {
+    padding: 8px 10px;
+    margin: 0 5px;
 }
