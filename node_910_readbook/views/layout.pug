@@ -7,15 +7,17 @@ html(lang="ko")
     title= title
     link(rel='stylesheet', href='/css/main.css')
     script(src="/js/main.js")
-  header 
-    p1 MY READ BOOK 2024
   body
+    header 
+      h1 My Read Book 2024
+      p 올해는 무슨 책을 읽어야 할까
     nav.main 
-      ul 
-        li
-          a(href="/") 홈
-        li
-          a(href="/books") 도서정보 
-        li
-          a(href="/join") 회원가입
+      ul
+        li Home
+        li 도서정보
+        li 로그인
+        li 회원가입
     block content
+
+    footer 
+      center CopyRight &copy; tlsgmldnjs00@naver.com
