@@ -29,17 +29,20 @@ router.get("/insert", (req, res) => {
     const price = req.body.price;
 
     const params = [isbn, title, author, publisher, price];
-    const sql = " INSERT INTO tbl_read_book(isbn, title, author, publisher, price) "
-        + " VALUES ( ?,?,?,?,? ) ";
+    const sql = 
+        " INSERT INTO tbl_read_book(isbn, title, author, publisher, price) " + 
+        " VALUES ( ?,?,?,?,? ) ";
     dbConn.query(sql, params, (err, result) => {
         if (err) {
             return res.json(err);
         } else {
-            return res.redirect("/book/");
-
+            return res.render("/books/");
         }
     });
 });
+
+
+
 
 router.get("/:isbn/detail", (req, res) => {
     const isbn = req.params.isbn;
@@ -90,7 +93,7 @@ router.get("/:isbn/update", (req, res) => {
         if (err) {
             return res.json(err);
         } else {
-            return res.render("books/update", { STD: result[0] });
+            return res.render("books/input", { STD: result[0] });
         }
     });
 });
@@ -111,8 +114,7 @@ router.post("/:isbn/update", (req, res) => {
     const image = req.body.image;
 
     const params = [
-        title, author, publisher, translator, price,
-        discount, pubdate, page, memo, description, pubdate, link, image, isbn,];
+        title, author, publisher, translator, price, discount, pubdate, page, memo, description, pubdate, link, image, isbn,];
     const sql =
         " UPDATE tbl_read_book "
         + " SET title = ?, "
@@ -128,6 +130,7 @@ router.post("/:isbn/update", (req, res) => {
         + " link = ? "
         + " image = ? "
         + " WHERE isbn = ? ";
+
     dbConn.query(sql, params, (err, result) => {
         if (err) {
             return res.json(err);

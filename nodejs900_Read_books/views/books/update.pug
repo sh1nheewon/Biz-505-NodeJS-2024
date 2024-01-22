@@ -2,7 +2,7 @@ extends ../layout
 block content
     link(rel="stylesheet", href="/css/input.css")
     if !STD
-        script(src="/js/input.js")
+        script(src="/js/update.js")
     h3.book 도서정보 수정
     form.book.input(method="POST") 
         if STD
@@ -41,6 +41,10 @@ block content
         input#memo(name="memo", placeholder="메모",
         | value=`${STD ? STD.memo : ""}`)
 
+<<<<<<< HEAD
+=======
+    form.book.input.sub(method="POST")    
+>>>>>>> d6964b8a17b2c7d141217919e39fac1b6368e511
         input#description(name="description", placeholder="요약",
         | value=`${STD ? STD.description : ""}`)
 
@@ -50,6 +54,11 @@ block content
         input#image(name="image", placeholder="이미지링크",
         | value=`${STD ? STD.image : ""}`)
 
+<<<<<<< HEAD
         button(type=`${STD ? "submit" : "submit"}`) 저장
+=======
+    form.book.input(method="POST") 
+        button.btn_update(type=`${STD ? "submit" : "submit"}`) 저장
+>>>>>>> d6964b8a17b2c7d141217919e39fac1b6368e511
         button.btn_insert 새로작성
         button.btn_list 리스트보기
