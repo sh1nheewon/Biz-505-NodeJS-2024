@@ -65,17 +65,44 @@ router.post("/insert", (req, res) => {
 });
 
 router.get("/:isbn/detail", (req, res) => {
+    // 주소창이 params 를 통해 isbn 변수에 담아라는 것을 요청.
     const isbn = req.params.isbn;
-    console.log(isbn);
-    const params = [isbn];
     const sql = " SELECT * FROM tbl_books WHERE isbn = ? ";
-    dbConn.query(sql, params, (err, result) => {
-        if (err) {
+    dbConn
+        .query(sql, isbn)
+        .then((rows) => {
+            // return res.json(rows[0][0]);
+            return res.render("books/detail1", { book: rows[0][0] });
+            // book 에 있는 [0]번쨰의 [0]의 데이터를 /detail 로 보낸다.
+        })
+        .catch((err) => {
             return res.json(err);
-        } else {
-            return res.render("/detail", { STD: result[0] });
-        }
-    });
+        });
+});
+
+router.get("/:isbn/delete", (req, res) => {
+    const isbn = req.params.isbn;
+    const sql = " DELETE FROM tbl_books WHERE isbn = ? ";
+    dbConn.query(sql, isbn)
+        .then((_) => {
+            return res.redirect("/books");
+        })
+        .catch(err => {
+            return res.render("db_error", err);
+        });
+});
+
+router.get("/:isbn/update", (req, res) => {
+    const isbn = req.params.isbn;
+    const sql = " SELECT * FROM tbl_books WHERE isbn = ? "
+    dbConn.query(sql, isbn)
+        .then(rows => {
+            return res.render("books/input", { book: rows[0][0] });
+        })
+        .catch((err) => {
+            return res.render("db_error", err);
+        })
+
 });
 
 export default router;

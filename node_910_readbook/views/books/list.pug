@@ -1,7 +1,7 @@
 extends ../books/main
 block book_content
     link(rel="stylesheet", href="/css/books/list.css")
-    script(src="/js/list.js")
+    script(src="/js/books/list.js")
     table.books 
         colgroup
             col.isbn
@@ -21,7 +21,7 @@ block book_content
         tbody
 
             each book in books 
-                tr
+                tr(data-isbn=`${book.isbn}`)
                     td= book.isbn
                     td= book.title
                     td= book.publisher

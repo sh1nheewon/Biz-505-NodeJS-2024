@@ -90,3 +90,29 @@ DDL(Data Definition Lang.) : DBA(Database Administrator, 최고관리자)가 사
 -- shinheewon 이라는 사용자를 localhost 에서만 접근할 수 있도록 생성한다.
 CREATE USER 'shinheewon'@'localhost' IDENTIFIED BY '!Biz8080';
 -- 하지만 새로 생성된 사용자는 아무런 권한이 없기 때문에 할 수 있는 일이 없다.
+
+SHOW DATABASES;
+/*
+정보보호의 2가지 구분
+보안 : 허가받지 않은 사용자가 시스템에 침투하여
+		시스템에 문제를 일으키는 행위 (해킹)
+        
+무결성 : 허가받은 사용자 중에 권한이 잘못 부여되어
+		시스템(데이터)에 문제를 일으키는 행위
+        
+무결성을 보장하기 위하여
+        생성된 사용자에게 적절한 권한을 제한적으로 부여하여
+        여러 민감한 데이터의 손상, 변화(INSERT, UPDATE, DELETE)를 
+        최소화하여야 한다.
+*/
+
+-- shinheewon 사용자에게 bookDB2 데이터베이스에 대하여 권한을 부여하기
+-- TABLE 생성, CRUD 를 수행할 수 있다
+-- bookDB2.* : bookDB2 의 모든 테이블. * 자리에 원하는 테이블 입력 가능.
+GRANT ALL PRIVILEGES ON bookDB2.* TO 'shinheewon'@'localhost';
+-- *.* 모든 데이터베이스의 모든 테이블
+GRANT ALL PRIVILEGES ON *.* TO 'shinheewon'@'localhost';
+
+FLUSH PRIVILEGES;
+-- 기존에 부여된 권한을 회수하기
+REVOKE ALL PRIVILEGES ON *.* FROM 'shinheewon'@'localhost';
