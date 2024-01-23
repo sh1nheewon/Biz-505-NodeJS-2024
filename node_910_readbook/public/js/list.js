@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const table = document.querySelector("table.book.list");
+    const table = document.querySelector("table.books");
     table.addEventListener("click", (event) => {
         const target = event.target;
         if (target.tagName === "TD") {

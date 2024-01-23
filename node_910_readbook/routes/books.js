@@ -64,4 +64,18 @@ router.post("/insert", (req, res) => {
         });
 });
 
+router.get("/:isbn/detail", (req, res) => {
+    const isbn = req.params.isbn;
+    console.log(isbn);
+    const params = [isbn];
+    const sql = " SELECT * FROM tbl_books WHERE isbn = ? ";
+    dbConn.query(sql, params, (err, result) => {
+        if (err) {
+            return res.json(err);
+        } else {
+            return res.render("/detail", { STD: result[0] });
+        }
+    });
+});
+
 export default router;
