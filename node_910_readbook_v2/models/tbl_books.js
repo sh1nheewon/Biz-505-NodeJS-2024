@@ -1,39 +1,48 @@
-import sequelize from "sequelize";
+import Sequelize from "sequelize";
 
-// seq : sequelize 도구에서 제공하는 data 객체 생성 도구
-const books = (seq) => {
-    // book_table 이라는 DTO 생성
-    const book_table = {
-        isbn: {
-            type: sequelize.DataTypes.STRING(13),
-            primaryKey: true,
-        },
-        title: {
-            type: sequelize.DataTypes.STRING(50),
-            allowNull: false,
-            // = not Null
-        },
-        author: {
-            type: sequelize.DataTypes.STRING(50),
-            allowNull: false,
-        },
-        publisher: {
-            type: sequelize.DataTypes.STRING(50),
-            allowNull: false,
-        },
-        price: {
-            type: sequelize.DataTypes.INTEGER,
-        },
-        discount: {
-            type: sequelize.DataTypes.INTEGER,
-        },
-    };
-    const seq_init = {
-        // const books 함수의 매개변수 seq 를 sequelize 라는 이름으로 선언
-        sequelize: seq,
-        tableName: "tbl_books",
-    };
-    // ORM : workbench 에서 만들지 않아도 table 자동생성. tableName 에 있는 tbl_books 모양대로 만들어짐
-    return seq.define("tbl_books", book_table, seq_init);
+// (seq) 는 소문자로. return에 사용
+const book = (sequelize) => {
+  const book_table = {
+    // book_table 이라는 객체 안에 isbn 이라는 객체 생성 (json 안에 다른 json 생성)
+    isbn: {
+      // 대문자 Seq 는 import 를 가지고 옴(1)
+      type: Sequelize.DataTypes.STRING(13),
+      primaryKey: true, // PK 선언
+      defaultValue: "",
+    },
+    title: {
+      type: Sequelize.DataTypes.STRING(50),
+      allowNull: false, //Not Null 선언
+      defaultValue: "",
+    },
+    author: {
+      type: Sequelize.DataTypes.STRING(50),
+      allowNull: false, //Not Null 선언
+      defaultValue: "",
+    },
+    publisher: {
+      type: Sequelize.DataTypes.STRING(50),
+      allowNull: false, //Not Null 선언
+      defaultValue: "",
+    },
+    price: {
+      type: Sequelize.DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    discount: {
+      type: Sequelize.DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+  }
+  return sequelize.define("tbl_books", book_table, {
+    // sequelize 라는 변수를 선언하고, 
+    // book 함수에서 매개변수로 받은 sequelize 를 값으로 세팅한다.
+    // 단 선언하는 변수명과, 세팅하는 값이 담긴 변수명이 같으면 
+    // 값이 담긴 변수명을 생략할 수 있다.
+    // sequelize : sequelize 이 명령문을 sequelize 만 사용해도 된다.
+    sequelize,
+    tableName: "tbl_books",
+    timestamps: false,
+  });
 };
-export default books;
+export default book;

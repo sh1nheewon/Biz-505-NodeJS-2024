@@ -4,11 +4,12 @@ import initModel from './init-models.js'
 
 const env = process.env.NODE_ENV || 'development'
 import configJS from '../config/db_config.js'
+// db_config.js 정보를 처리함
 const config = configJS[env]
 
 let sequelize
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config)
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   sequelize = new Sequelize(
     config.database,
@@ -17,6 +18,6 @@ if (config.use_env_variable) {
     config
   )
 }
-const db = { sequelize }
-db.models = initModel(sequelize)
-export default db
+const db = { sequelize };
+db.models = initModel(sequelize);
+export default db;
