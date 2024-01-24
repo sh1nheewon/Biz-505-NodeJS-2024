@@ -30,3 +30,6 @@
 - `npm install`
 - `nodemon` 실행. Ctrl + c 로 나와서
 - `npm install mysql2` 실행
+
+## sequelize 도구 사용
+- ` npx express-21c 프로젝트명 --sequelize `
