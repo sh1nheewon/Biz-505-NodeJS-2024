@@ -11,6 +11,8 @@ import express from 'express';
 import createError from 'http-errors';
 import path from 'path';
 import helmet from 'helmet';
+// session 도구 import
+import session from "express-session";
 
 // 3rd party lib modules  
 import cookieParser from 'cookie-parser';
@@ -23,6 +25,7 @@ import DB from '../models/index.js';
 // import router modules
 import indexRouter from '../routes/index.js';
 import usersRouter from '../routes/users.js';
+import iolistRouter from "../routes/iolist.js";
 
 // create express framework
 const app = express();
@@ -51,9 +54,35 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("public")));
 
+// session을 사용하기 위한 설정
+// cookieParser() 설정 이후에 위치
+app.use(session({
+  key: "shinheewon", // 식별자, 브라우저에 저장될 cookie 이름
+  secret: "tlsgmldnjs00@naver.com", // SessionID 암호화용 키
+  cookie: {
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60, // 로그인 유지 유효시간 
+  }
+}));
+// 로그인을 하지 않아도 될 곳(회원인증)
+app.use('/users', usersRouter);
+
+/*
+ 모든 요청 http://localhost:3000/* 로 요청한 것들
+ 어떤 특정 요청에 대한 routing 을 실행하는 것이 아니다
+ 모든 요청에 대하여 공통으로 어떤 명령을 실행하고 싶을때 사용하는 router 이다.
+ 이 routere 코드의 끝에는 반드시 next() 함수를 실행해 주어야 한다.
+ 그렇지 않으면 다른 router 들이 전혀 실행되지 않는다. 
+ */
+app.use((req, res, next) => {
+  res.locals = req.session;
+  next();
+  /* next 를 넣지 않으면 다음 router 로 진행이 안됨. */
+});
+
 // router link enable, link connection
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use("/iolist", iolistRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

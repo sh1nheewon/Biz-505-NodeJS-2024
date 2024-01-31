@@ -16,19 +16,21 @@ router.get('/', async (req, res, next) => {
     Nav 의 Menu 를 클릭할 때
     a tag 의 링크를 클릭할 때
 */
+
+
 router.get("/join", async (req, res) => {
   res.render("users/join");
 });
 
 
 /*
-  POST http://localhost:3000/users/join 으로 요청이 되면
-  POST Method
-    form(method="POST") 이 감싸고 있는 input tag 에 입력된 값을
-    HTTP Body 에 담아서 서버에 보낼때
+POST http://localhost:3000/users/join 으로 요청이 되면
+POST Method
+form(method="POST") 이 감싸고 있는 input tag 에 입력된 값을
+HTTP Body 에 담아서 서버에 보낼때
 
-    Client 가 데이터를 대량으로 보내면서
-    이 데이터를 처리해줘 라는 요청
+Client 가 데이터를 대량으로 보내면서
+이 데이터를 처리해줘 라는 요청
 */
 router.post("/join", async (req, res) => {
   /*
@@ -36,10 +38,10 @@ router.post("/join", async (req, res) => {
   현재 tbl_members table 에서 회원전체를 조회
   조회된 회원이 없으면 지금 요청된 회원이 ADMIN 이다
   그렇지 않으면 요청된 회원은 일반 USER 이다
-
+  
   req.body 데이터에 m_role 이라는 속성을 생성하면서 
   그 값에 ADMIN 또는 USER 라는 문자열을 저장한다
-
+  
   있으면 USER 로 표시, 없으면 USER m_role 을 생성
   create 로 생성(insert)
   */
@@ -55,9 +57,9 @@ router.post("/join", async (req, res) => {
 
 
 /*
-  GET http://localhost:3000/users/callor/check 라는 요청이 되면
-  callor 라는 사용자 정보가 Table 에 저장되어 있냐 라는 것을 묻기
-  있으면 MESSAGE = "FOUND" 응답, 없으면 MESSAGE = "NOT FOUND" 라고 응답.
+GET http://localhost:3000/users/callor/check 라는 요청이 되면
+callor 라는 사용자 정보가 Table 에 저장되어 있냐 라는 것을 묻기
+있으면 MESSAGE = "FOUND" 응답, 없으면 MESSAGE = "NOT FOUND" 라고 응답.
 */
 router.get("/:username/check", async (req, res) => {
   const username = req.params.username;
@@ -69,10 +71,16 @@ router.get("/:username/check", async (req, res) => {
   }
 });
 
+const LOGIN_MESSAGE = {
+  USER_NOT: "사용자 ID 없음",
+  PASS_WRONG: "비밀번호 오류",
+  NEED_LOGIN: "로그인 필요",
+}
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 로그인하기 */
 
-router.get("/login", async (req, res) => {
-  res.render("users/login");
+router.get("/login", (req, res) => {
+  const message = req.query.fail;
+  return res.render("users/login", { NEED: message });
 });
 
 /*
@@ -88,12 +96,24 @@ router.post("/login", async (req, res) => {
 
   const result = await USER.findByPk(username);
   if (!result) {
-    return res.json({ MESSAGE: "USER NOT FOUND" });
+    return res.redirect(`/users/login?fail=${LOGIN_MESSAGE.USER_NOT}`);
+    // return res.json({ MESSAGE: "USER NOT FOUND" });
   } else if (result.m_username === username && result.m_password !== password) {
-    return res.json({ MESSAGE: "PASSWORD WRONG" });
+    return res.redirect(`/users/login?fail=${LOGIN_MESSAGE.PASSWORD_WRONG}`)
+    // return res.json({ MESSAGE: "PASSWORD WRONG" });
   } else if (result.m_username === username && result.m_password === password) {
-    return res.json({ MESSAGE: "LOGIN OK" });
+
+    /* DB에서 가져온 사용자 정보 (result)를 Server 의 Session 영역에 user 라는 이름으로 보관하라
+    그리고 Session ID 를 발행하라 */
+    req.session.user = result;
+    return res.redirect("/");
+    // return res.json({ MESSAGE: "LOGIN OK" });
   }
+});
+
+router.get("/logout", (req, res) => {
+  req.session.destroy();
+  return res.redirect("/");
 });
 
 
