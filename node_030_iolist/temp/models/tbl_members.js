@@ -1,33 +1,32 @@
 import { Model } from 'sequelize';
 
-
-export default class tbl_depts extends Model {
+export default class tbl_members extends Model {
   static init(sequelize, DataTypes) {
     return super.init({
-      d_code: {
-        type: DataTypes.STRING(5),
+      m_username: {
+        type: DataTypes.STRING(15),
         allowNull: false,
         primaryKey: true
       },
-      d_name: {
-        type: DataTypes.STRING(50),
+      m_password: {
+        type: DataTypes.STRING(125),
         allowNull: false
       },
-      d_ceo: {
+      m_realname: {
         type: DataTypes.STRING(20),
         allowNull: true
       },
-      d_tel: {
+      m_tel: {
         type: DataTypes.STRING(15),
         allowNull: true
       },
-      d_addr: {
-        type: DataTypes.STRING(125),
+      m_role: {
+        type: DataTypes.STRING(5),
         allowNull: true
       }
     }, {
       sequelize,
-      tableName: 'tbl_depts',
+      tableName: 'tbl_members',
       timestamps: false,
       indexes: [
         {
@@ -35,7 +34,7 @@ export default class tbl_depts extends Model {
           unique: true,
           using: "BTREE",
           fields: [
-            { name: "d_code" },
+            { name: "m_username" },
           ]
         },
       ]

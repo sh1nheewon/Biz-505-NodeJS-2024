@@ -1,33 +1,40 @@
 import { Model } from 'sequelize';
 
-
-export default class tbl_depts extends Model {
+export default class tbl_products extends Model {
   static init(sequelize, DataTypes) {
     return super.init({
-      d_code: {
-        type: DataTypes.STRING(5),
+      p_code: {
+        type: DataTypes.STRING(6),
         allowNull: false,
         primaryKey: true
       },
-      d_name: {
+      p_name: {
         type: DataTypes.STRING(50),
         allowNull: false
       },
-      d_ceo: {
+      p_item: {
         type: DataTypes.STRING(20),
         allowNull: true
       },
-      d_tel: {
-        type: DataTypes.STRING(15),
+      p_std: {
+        type: DataTypes.STRING(20),
         allowNull: true
       },
-      d_addr: {
-        type: DataTypes.STRING(125),
+      p_comp: {
+        type: DataTypes.STRING(50),
+        allowNull: true
+      },
+      p_iprice: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+      },
+      p_oprice: {
+        type: DataTypes.INTEGER,
         allowNull: true
       }
     }, {
       sequelize,
-      tableName: 'tbl_depts',
+      tableName: 'tbl_products',
       timestamps: false,
       indexes: [
         {
@@ -35,7 +42,7 @@ export default class tbl_depts extends Model {
           unique: true,
           using: "BTREE",
           fields: [
-            { name: "d_code" },
+            { name: "p_code" },
           ]
         },
       ]
