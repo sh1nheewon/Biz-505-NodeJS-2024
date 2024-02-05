@@ -1,6 +1,8 @@
 extends ../layout
 
 block content
+    link(rel="stylesheet", href="/css/detail.css")
+    script(src="/js/detail.js")
     div.detail
         h3 #{PRODUCT.p_name} 상품 자세히 보기
         p= PRODUCT.p_code
@@ -21,3 +23,6 @@ block content
                     td= item.io_dcode 
                     td= item.IO_거래처.d_name
                     td= item.IO_거래처.d_ceo
+    div
+        button.btn_update 수정
+        button.btn_list 리스트로

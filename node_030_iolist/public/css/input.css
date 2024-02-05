@@ -1,0 +1,17 @@
+form {
+    width: 80%;
+
+    div {
+        width: 50%;
+        text-align: center;
+        margin: 8px;
+
+        input {
+            padding: 5px;
+
+            &:focus {
+                background-color: #ddd;
+            }
+        }
+    }
+}

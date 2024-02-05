@@ -1,0 +1,49 @@
+.products {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #eee;
+    border-collapse: separate;
+    border-spacing: 0.5px;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 10px 12px;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    border-color: white;
+
+    &:nth-last-of-type(1) {
+        border-right: 1px solid transparent;
+    }
+}
+
+th {
+    border-top: 1px solid #ddd;
+}
+
+tr.list {
+    &:hover {
+        background-color: #ddd !important;
+    }
+
+    &:nth-of-type(even) {
+        background-color: #f9f9f9;
+    }
+}
+
+div {
+    text-align: center;
+    padding: 10px;
+
+    a {
+        background-color: #ddd;
+        margin: 0 0 0 30px;
+        color: black;
+        font-weight: 800;
+
+        padding: 7px 20px;
+
+    }
+}

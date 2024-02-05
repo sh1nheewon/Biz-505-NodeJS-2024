@@ -8,10 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.location.replace(`/products/${p_code}/detail`);
         }
     });
-    /*
-        const btn_insert = document.querySelector("button.btn_insert");
-        btn_insert.addEventListener("click", () => {
-            document.location.href("/products/insert");
-        });
-    */
+
+
 });

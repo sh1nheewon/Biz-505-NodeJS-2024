@@ -161,7 +161,6 @@ router.get("/logout", (req, res) => {
   return res.redirect("/");
 });
 
-
 export default router
 
 /*

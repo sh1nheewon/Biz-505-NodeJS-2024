@@ -8,7 +8,6 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
     const rows = await PRODUCTS.findAll({
-
         limit: 10,
         order: [["p_code", "ASC"]],
     });
@@ -32,5 +31,9 @@ router.get("/insert", (req, res) => {
 });
 
 
+router.get("/:pcode/update", (req, res) => {
+    const pcode = req.params.pcode;
+    return res.render("product/update");
+});
 
 export default router;
