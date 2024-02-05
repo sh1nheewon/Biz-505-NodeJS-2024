@@ -1,6 +1,6 @@
 import express from "express";
-
 import DB from "../config/mysql.js";
+
 const router = express.Router();
 const dbConn = DB.init();
 
@@ -29,8 +29,8 @@ router.get("/insert", (req, res) => {
     const price = req.body.price;
 
     const params = [isbn, title, author, publisher, price];
-    const sql = 
-        " INSERT INTO tbl_read_book(isbn, title, author, publisher, price) " + 
+    const sql =
+        " INSERT INTO tbl_read_book(isbn, title, author, publisher, price) " +
         " VALUES ( ?,?,?,?,? ) ";
     dbConn.query(sql, params, (err, result) => {
         if (err) {
