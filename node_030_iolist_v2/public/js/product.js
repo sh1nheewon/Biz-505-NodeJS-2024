@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // 복사 붙이기 한 파일을 input(type="file") tag 에 포함하기
             const dataTransfer = new DataTransfer();
             dataTransfer.items.add(blob);
-            input_image.file = dataTransfer.files;
+            input_image.files = dataTransfer.files;
         }
     });
 });
