@@ -1,0 +1,28 @@
+extends ../layout
+block content 
+    link(rel="stylesheet", href="/css/input.css")
+    h1 상품입력
+    form(method="POST") 
+        div
+            label(for="") 상품코드
+            input(type="text")
+        div
+            label(for="") 상품이름
+            input(type="text")
+        div
+            label(for="") 품목
+            input(type="text")
+        div
+            label(for="") 규격
+            input(type="text")
+        div
+            label(for="") 매입단가
+            input(type="text")
+        div
+            label(for="") 매출단가
+            input(type="text")
+        div 
+            input(type="image")
+        div 
+            button 입력
+            button 취소

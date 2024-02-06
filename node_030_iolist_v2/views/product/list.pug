@@ -1,0 +1,25 @@
+extends ../layout
+block content
+    link(rel="stylesheet", href="/css/product.css")
+    script(src="/js/product.js")
+    h1 상품관리
+    table.products
+        tr
+            th 상품코드
+            th 상품이름
+            th 품목
+            th 규격
+            th 매입단가
+            th 매출단가
+        each item in PRODUCTS
+            tr.list(data-pcode=`${item.p_code}`)
+                td= item.p_code 
+                td= item.p_name 
+                td= item.p_item 
+                td= item.p_std
+                td= item.p_iprice
+                td= item.p_oprice
+    div
+        input(type="text", placeholder="상품")
+        button 조회
+        a(href="/products/insert") 추가

@@ -1,0 +1,27 @@
+extends ../layout
+block content
+    h3 #{PRODUCT.p_name} 정보수정
+    form(method="POST")
+        div 
+            input(type="image")
+        div
+            label(for="") 상품코드
+            input(type="text")
+        div
+            label(for="") 상품이름
+            input(type="text")
+        div
+            label(for="") 품목
+            input(type="text")
+        div
+            label(for="") 규격
+            input(type="text")
+        div
+            label(for="") 매입단가
+            input(type="text")
+        div
+            label(for="") 매출단가
+            input(type="text")
+        div 
+            button 수정
+            button 삭제            
