@@ -131,4 +131,52 @@ div.img_box {
     */
     max-width: calc(95% - 12px - 10px);
     border: 1px solid #ccc;
+    position: relative;
+
+    padding: 10px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img.img_add {
+        transition: 0.7s;
+
+        &:hover {
+            opacity: 0.5;
+            width: 120px;
+            height: 120px;
+            cursor: pointer;
+        }
+    }
+
+    /*
+    목표 : div.img_box 를 클릭하면 focus 가 지정되고, focus 가 지정된 것을 보여주기
+    1. div box 는 focus 를 지정할 수 없다.
+        focus 를 지정할 수 있는 tag 는 input, button 등 몇몇으로 한정된다.
+    2. div box 내부에 input tag 를 하나 추가하고 opacity 를 0 으로 하여 투명하게 한다. 
+        (display : none 을 하면 안됨)
+        position 을 absolute 로 설정을 하여 위치도 투명하게 : 다른 tag 를 간섭하지 않도록 하기.
+    3. JS 를 이용하여 div box 를 클릭하면 input tag 에 focus() 를 실행한다.
+    4. div:focus-within 속성이 적용된다.
+        div box 가 포함하는 input tag 등에 focus 가 설정되면 
+        자신이 focus 를 받은 것 처럼 반응하게 한다.
+    5. 22년 이후의 최신 브라우저만 적용된다.
+    */
+    &:focus-within {
+        border: 1px solid blue;
+        background-color: #f2f2f2;
+    }
+
+    input#img_focus {
+        opacity: 0;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+}
+
+input#p_image {
+    display: none;
 }
