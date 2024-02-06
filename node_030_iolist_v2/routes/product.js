@@ -14,6 +14,14 @@ router.get("/", async (req, res) => {
     return res.render("product/list", { PRODUCTS: rows });
 });
 
+router.get("/insert", (req, res) => {
+    return res.render("product/input");
+});
+
+router.post("/insert", (req, res) => {
+    return res.json(req.body);
+});
+
 router.get("/:pcode/detail", async (req, res) => {
     const pcode = req.params.pcode;
     const row = await PRODUCTS.findByPk(pcode, {
