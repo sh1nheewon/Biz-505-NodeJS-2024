@@ -1,5 +1,21 @@
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    const TH_ITEMS = {
+        상품코드: "p_code",
+        상품이름: "p_name",
+        품목: "p_item",
+        규격: "p_std",
+        매입단가: "p_iprice",
+        매출단가: "p_oprice",
+    }
+
+    // href : 현재 화면이 열릴 때 서버에 요청한 주소창의 값들(검색을 했을 때 주소창에 있는 주소+값 전체)
+    // href 값의 일부를 추출하거나, 값을 가공하기 위해 사용
+    const url = new URL(document.location.href);
+    const sort = url.searchParams.get("sort");
+    const order = url.searchParams.get("order");
+
     const pro_table = document.querySelector("table.products");
     /*
     table.products 선택자는 상품리스트 화면에서는 유효한 선택자 이다
@@ -18,10 +34,47 @@ document.addEventListener("DOMContentLoaded", () => {
             const tr = target.closest("TR");
             const p_code = tr.dataset.pcode;
             document.location.replace(`/products/${p_code}/detail`);
-        }
-    });
+
+        } else if (target.tagName === "TH" || target.closest("TH")) {   // 현재 click 된 요소가 TH 이거나 TH 의 자손이면
+            const text = target.innerText || target.closest("TH").innerText;
+            const sortColumn = TH_ITEMS[text.trim()];
 
 
+            //get 가져오기 . set 추가하기
+            // url 중에서 searchParams(또는 queryString) 들만 추출하기
+            url.searchParams.set("order", order === "ASC" ? "DESC" : "ASC")
+            // 없으면 추가 있으면 보여주기
+
+            // sort : 주소창의 값. sortColumn : 클릭한 칼럼 
+            // 주소창의 sort 선택요소와 클릭한 선택요소가 다르면 무조건 ASC 로 초기화 하기
+            sort != sortColumn && url.searchParams.set("order", "ASC");
+
+            // sortColumn 이 null 값이 아닌 경우만 sort 변수를 세팅
+            // null safe 코드
+            sortColumn && url.searchParams.set("sort", sortColumn)
+
+            document.location.replace(`/products?${url.searchParams.toString()}`);
+
+
+            // let sort = "p_code"
+            // if (text === "상품코드") {
+            //     sort = "p_code"
+            // } else if (text === "상품이름") {
+            //     sort = "p_name"
+            // }
+
+        }// end if
+    }); // end event
+
+    // DOMContentLoaded 가 실행될 때 마다 실행
+    // 화면이 새로고침 할 때마다 실행됨
+
+    // "span.p_code"
+    const span_sort = document.querySelector(`span.${sort}`); // sort : 클릭한 메뉴 값(상품코드, 상품이름 등등)
+    const icon = span_sort.querySelector("i.arrow");
+    span_sort.classList.add("sort");
+    // i.arrow 클래스 뒤에 up 이나 down 클래스를 붙이는 코드
+    icon.classList.add(order === "ASC" ? "up" : "down");
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -61,12 +114,12 @@ document.addEventListener("DOMContentLoaded", () => {
         input_img.click();
     });
     input_img?.addEventListener("change", imagePreView);
-    div_img.addEventListener("click", () => {
+    div_img?.addEventListener("click", () => {
         input_focus.focus();
     });
 
     // copy and paste 발생. 
-    div_img.addEventListener("paste", async (e) => {
+    div_img?.addEventListener("paste", async (e) => {
         const items = e.clipboardData.items;
         const item = items[0]; // item 에 사진 저장
         const img_add = document.querySelector("img.img_add");
