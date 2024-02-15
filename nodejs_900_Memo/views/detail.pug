@@ -1,0 +1,24 @@
+extends layout
+block content
+  link(rel="stylesheet", href="/css/detail.css")
+  script(src="/js/detail.js")
+
+table
+  tr
+    th 일련번호
+    th 작성자
+    th 작성날짜
+    th 작성시각
+    th 메모내용
+    th 이미지파일
+    each memo in MEMO
+      tr
+        td= memo.m_seq
+        td= memo.m_author
+        td= memo.m_date 
+        td= memo.m_time 
+        td= memo.m_memo
+        td= memo.m_image
+  div
+    input(type="text",value="수정")
+    input(type="text",value="삭제")   

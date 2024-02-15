@@ -1,0 +1,41 @@
+form {
+    display: inline-block;
+    padding: 10px 0;
+    width: 40%;
+    margin: 20px 0;
+
+    input {
+        margin: 0 8px;
+        padding: 5px;
+    }
+
+    &.input_new {
+        border-right: 1px solid #ccc;
+    }
+
+    &.input_memo {
+        padding-left: 20px;
+
+        input {
+            display: block;
+            margin: 5px 20px;
+            width: 60%;
+
+            &.memo.title {
+                padding: 0 20px;
+            }
+
+            &.memo.body {
+                height: 50vh;
+            }
+
+        }
+
+        div.img_box {
+
+
+            border: 1px solid red;
+        }
+
+    }
+}

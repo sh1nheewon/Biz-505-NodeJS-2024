@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  link(rel="stylesheet", href="/css/index.css")
+  script(src="/js/index.js")
+
+  form.input_new
+    input(type="date")
+    input(type="text")
+    input(type="button", value="새로작성") 
+  
+  form.input_memo(method="POST") 
+    fieldset 
+      div
+        input.memo.title(type="text", placeholder="제목을 입력하세요")
+        input.memo.body(type="text", placeholder="내용을 입력하세요")
+      div.img_box
+        input(type="file", accept="image/*")
+      div 
+        input.btn_save(type="button", value="저장")
