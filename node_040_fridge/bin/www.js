@@ -22,8 +22,8 @@ const normalizePort = (val) => {
 };
 
 
-const debug = createDebug('node-030-iolist:server');
-const port = normalizePort(process.env.PORT || "3001");
+const debug = createDebug('node-040-fridge:server');
+const port = normalizePort(process.env.PORT || "3000");
 
 /**
  * Create HTTP server.

@@ -20,7 +20,7 @@ block book_content
                 th 할인가격
         tbody
 
-            each book in books 
+            each book in books  
                 tr(data-isbn=`${book.isbn}`)
                     td= book.isbn
                     td= book.title

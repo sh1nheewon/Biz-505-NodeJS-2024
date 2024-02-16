@@ -69,7 +69,7 @@ const makePCodeNew = (pcode) => {
     let pCode = pcode.substring(1);
     const pCodeNumLength = pCodeNum.length;
     pCodeNum = String(Number(pCodeNum) + 1);
-    /*
+    /*t
     문자열.padStart(길이, 패턴)
     문자열 값을 전체 "길이" 개수만큼 만들고
     왼쪽에 비어있는 곳은 "패턴"으로 채워넣은 문자열을 생성하라

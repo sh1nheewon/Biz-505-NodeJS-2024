@@ -106,12 +106,15 @@ router.get("/:username/check", async (req, res) => {
   }
 });
 
+
+
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 로그인하기 */
+
 const LOGIN_MESSAGE = {
   USER_NOT: "사용자 ID 없음",
   PASS_WRONG: "비밀번호 오류",
   NEED_LOGIN: "로그인 필요",
 }
-/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 로그인하기 */
 
 router.get("/login", (req, res) => {
   const message = req.query.fail;
