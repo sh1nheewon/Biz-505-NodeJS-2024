@@ -5,6 +5,7 @@ export default class tbl_memos extends Model {
     return super.init({
       m_seq: {
         type: DataTypes.BIGINT,
+        autoIncrement: true,
         allowNull: false,
         primaryKey: true
       },
