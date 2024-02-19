@@ -28,12 +28,18 @@ router.post("/", upLoad.single("m_image"), async (req, res) => {
   console.log(imageFile);
   try {
     req.body.m_image = imageFile?.filename;
-    req.body.m_author = "callor@callor.com";
+    req.body.m_author = "tlsgmldnjs00@naver.com";
     await MEMOS.create(req.body);
     return res.redirect("/");
   } catch (error) {
     return res.json(error);
   }
+});
+
+router.get("/:seq/get", async (req, res) => {
+  const seq = req.params.seq;
+  const row = await MEMOS.findByPk(seq);
+  return res.json(row);
 });
 
 router.get("/get_new_date", async (req, res) => {
