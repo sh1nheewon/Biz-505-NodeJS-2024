@@ -7,6 +7,7 @@ div.aside {
   /* flex: 1; */
   /* max-width: 50%; */
   padding: 1rem;
+
   /* background-color: #ccc; */
   &:nth-of-type(1) {
     border-right: 1px solid #ddd;
@@ -15,14 +16,17 @@ div.aside {
 
 form.date {
   display: flex;
+
   input {
     /* display: inline-block; */
     width: 100%;
     padding: 5px;
     margin: 0 3px;
+
     &:nth-of-type(1) {
       margin-left: 0;
     }
+
     &:nth-last-of-type(1) {
       margin-right: 0;
     }
@@ -31,6 +35,7 @@ form.date {
 
 ul {
   list-style: none;
+
   li {
     box-shadow: 2px 2px 2px 2px #ddd, 2px 2px 2px 2px #aaa;
     margin: 10px 0;
@@ -41,9 +46,11 @@ ul {
     text 의 상하 위치가 가운데 정렬이 된다
     */
     line-height: 2.2rem;
+
     img {
       margin: 6px 5px -3px 5px;
     }
+
     &:hover {
       background-color: #eee;
       cursor: pointer;
@@ -54,10 +61,58 @@ ul {
 form.input {
   display: flex;
   flex-direction: column;
+  align-items: center;
+
   input {
     /* display: inline-block; */
     width: 100%;
     padding: 5px;
     margin: 3px 0;
+
+    &.toimage {
+      display: none;
+    }
+  }
+
+  img.memo {
+    transition: 0.7s;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.5;
+      box-shadow: inset 100px 100px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+input.update {
+  background-color: greenyellow;
+  color: black;
+  border: none;
+  outline: none;
+}
+
+input.btn_delete {
+  background-color: red;
+  color: white;
+  border: none;
+  outline: none;
+}
+
+
+@media screen and(max-width:800px) {
+
+  footer,
+  header,
+  section.main {
+    width: 95%;
+  }
+
+  section.main {
+    flex-direction: column;
+  }
+
+  div.aside:nth-of-type(1) {
+    order: 2;
   }
 }

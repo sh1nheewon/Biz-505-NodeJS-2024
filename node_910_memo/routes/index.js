@@ -22,19 +22,39 @@ router.get("/", async (req, res, next) => {
   // res.render("index", { toDate, toTime });
 });
 
+
+// 입력과 수정을 if 로 한번에 묶음
 router.post("/", upLoad.single("m_image"), async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const imageFile = req.file;
-  console.log(imageFile);
-  try {
-    req.body.m_image = imageFile?.filename;
-    req.body.m_author = "tlsgmldnjs00@naver.com";
+  const m_seq = req.query.seq;
+  // console.log(imageFile);
+  // try {
+  req.body.m_image = imageFile?.filename;
+  req.body.m_author = "tlsgmldnjs00@naver.com";
+  if (m_seq) {
+    await MEMOS.update(req.body, { where: { m_seq } });
+  } else {
     await MEMOS.create(req.body);
-    return res.redirect("/");
-  } catch (error) {
-    return res.json(error);
   }
+  return res.redirect("/");
+  // } catch (error) {
+  // return res.json(error);
+  // }
 });
+
+
+router.post("/update/:seq", upLoad.single("m_image"), async (req, res) => {
+  const imageFile = req.file;
+  const seq = req.params.seq;
+  req.body.m_image = imageFile?.filename;
+  req.body.m_author = "tlsgmldnjs00@naver.com";
+
+  await MEMOS.update(req.body, { where: { m_seq: seq } });
+  return res.redirect("/");
+
+});
+
 
 router.get("/:seq/get", async (req, res) => {
   const seq = req.params.seq;
