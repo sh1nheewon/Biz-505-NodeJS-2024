@@ -10,7 +10,7 @@ html {
 
 body {
   height: 100%;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /* font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; */
 }
 
 a {
@@ -34,7 +34,7 @@ header {
 
 footer {
   text-align: center;
-  background-color: rgb(159, 159, 238);
+  background-color: #6f8fe7;
   color: white;
   padding: 0.3rem;
 }
