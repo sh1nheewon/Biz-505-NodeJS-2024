@@ -47,6 +47,10 @@ export default class tbl_iolist extends Model {
       io_oprice: {
         type: DataTypes.INTEGER,
         allowNull: true
+      },
+      io_delete: {
+        type: DataTypes.INTEGER,
+        allowNull: true
       }
     }, {
       sequelize,
